@@ -1,0 +1,36 @@
+CREATE TABLE users (
+    user_id serial NOT NULL PRIMARY KEY,
+    username varchar(50) UNIQUE NOT NULL,
+    password varchar(50) NOT NULL,
+    email varchar(250) UNIQUE NOT NULL,
+    car_id int REFERENCES car (id)
+);
+
+CREATE TABLE car (
+    id serial NOT NULL PRIMARY KEY,
+    name varchar(100) NOT NULL,
+    model varchar(100) NOT NULL,
+);
+
+INSERT INTO car
+(name, model)
+VALUES
+('Land Rover', 'Sterling'),
+('GMC', 'Acadia')
+
+INSERT INTO users 
+(username, password, email, car_id)
+VALUES 
+('Johnas', '12345', 'johnas@email.com', 1),
+('Bjarn', '12345', 'bjarn.stourtrup@email.com', 1),
+('Samuel', '12345', 'samuel@email.com', 2),
+('Jean', '12345', 'jean@email.com', 2),
+('Michel', '12345', 'michel@email.com', 1)
+
+SELECT * FROM users;
+
+SELECT * FROM car;
+
+SELECT * FROM users JOIN car ON users.car_id = car.id;
+
+SELECT users.username, users.email, car.name, car.model FROM users JOIN car ON users.car_id = car.id;
